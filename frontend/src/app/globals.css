@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #ffffff;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .border-gradient {
+    border-image: linear-gradient(135deg, #000000, #1a1a1a) 1;
+  }
+  
+  .shadow-elegant {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .shadow-elegant-lg {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Arabic text support */
+.arabic-text {
+  direction: rtl;
+  font-family: 'Noto Sans Arabic', 'Arial', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2.5;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* Calligraphy-inspired decorative elements */
+.calligraphy-line {
+  position: relative;
+  display: inline-block;
+}
+
+.calligraphy-line::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #000, transparent);
+  opacity: 0.3;
+}
+
+/* Chat message animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+
