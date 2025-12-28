@@ -19,10 +19,16 @@ def create_env_file():
     """Create .env file with database connection."""
     env_path = Path(__file__).parent / ".env"
     
-    # Database URL - password contains @ which needs URL encoding
-    # Original: meliodas@786
-    # Encoded: meliodas%40786
-    database_url = "postgresql://postgres:meliodas%40786@db.ancgewcnnghvnqeninxo.supabase.co:5432/postgres"
+    # Database URL - Get from user input or environment variable
+    database_url = os.getenv("DATABASE_URL")
+    if not database_url:
+        print("\n📝 Database Configuration")
+        print("Enter your PostgreSQL database URL (e.g., postgresql://user:password@host:port/database)")
+        print("Note: If password contains special characters like @, use URL encoding (%40 for @)")
+        database_url = input("DATABASE_URL: ").strip()
+        if not database_url:
+            print("⚠ Warning: DATABASE_URL not provided. You'll need to set it manually in .env")
+            database_url = "postgresql://user:password@localhost:5432/database"
     
     # OpenAI API Key (from llm_explainer.py - now moved to env)
     openai_key = input("Enter your OpenAI API key: ").strip()

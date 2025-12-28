@@ -17,8 +17,23 @@
 
 **Truth Preservation**: Instead of letting an LLM freely generate answers (which often leads to invented explanations or mixing of sources), this system enforces a strict Retrieval-Augmented Generation (RAG) pipeline where every answer must be explicitly supported by Quranic verses retrieved from a verified dataset.
 
+## 🖼️ Project Showcase
+
+### Landing Page
+![Landing Page](screenshot/landing%20page.png)
+*Clean, minimalist landing page with bold typography and calligraphy-inspired design. Features hero section, feature cards, and call-to-action buttons.*
+
+### Q&A Chat Interface
+![Chat UI](screenshot/chatui.png)
+*Modern conversational chat interface for asking questions about the Quran. User messages appear in black bubbles, assistant responses in white with citations.*
+
+### Supporting Verses Display
+![Supporting Verses](screenshot/supporting%20verses.png)
+*Answer display with supporting Quranic verses. Shows Arabic text, translations, and relevance scores in an elegant card layout.*
+
 ## 📋 Table of Contents
 
+- [Project Showcase](#️-project-showcase)
 - [Features](#-features)
 - [Architecture](#-architecture)
 - [Tech Stack](#-tech-stack)
@@ -26,7 +41,6 @@
 - [API Documentation](#-api-documentation)
 - [Installation](#-installation)
 - [Usage](#-usage)
-- [Screenshots](#-screenshots)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -57,48 +71,8 @@
 
 ### System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        Frontend Layer                        │
-│  Next.js 14 + TypeScript + Tailwind CSS + Framer Motion     │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │ Landing Page │  │  Q&A Chat    │  │  Auth Pages  │      │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
-│         │                 │                 │               │
-│         └─────────────────┴─────────────────┘               │
-│                           │                                 │
-│                    HTTPS/REST API                           │
-└───────────────────────────┼─────────────────────────────────┘
-                            │
-┌───────────────────────────▼─────────────────────────────────┐
-│                      Backend Layer                           │
-│  FastAPI + SQLAlchemy + JWT Authentication                  │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │ Auth Router  │  │ Query Router │  │ Health Check │      │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
-│         │                 │                 │               │
-│         └─────────────────┴─────────────────┘               │
-│                           │                                 │
-│                    Service Layer                            │
-│  ┌──────────────────────────────────────────────┐          │
-│  │  QuranService (RAG Pipeline)                  │          │
-│  │  ┌──────────────┐      ┌──────────────┐       │          │
-│  │  │ Retrieval    │ ───► │ LLM Explainer│       │          │
-│  │  │ (FAISS)      │      │ (OpenAI)     │       │          │
-│  │  └──────────────┘      └──────────────┘       │          │
-│  └──────────────────────────────────────────────┘          │
-└───────────────────────────┬─────────────────────────────────┘
-                            │
-        ┌───────────────────┼───────────────────┐
-        │                   │                   │
-┌───────▼──────┐  ┌─────────▼─────────┐  ┌──────▼──────┐
-│  PostgreSQL  │  │  Redis Cache       │  │  FAISS      │
-│  (Supabase)  │  │  (Optional)        │  │  Index      │
-│              │  │                    │  │             │
-│  - Users     │  │  - Query Results   │  │  - Vectors  │
-│  - History   │  │  - TTL: 1 hour     │  │  - Metadata │
-└──────────────┘  └────────────────────┘  └─────────────┘
-```
+![Architecture Diagram](screenshot/architecture.png)
+*Complete system architecture showing the flow from frontend to backend, RAG pipeline, and data storage layers.*
 
 ### Data Flow
 
@@ -550,24 +524,6 @@ npm run dev
 ```
 
 Frontend will be available at: `http://localhost:3000`
-
-## 📸 Screenshots
-
-### Landing Page
-![Landing Page](screenshot/landing%20page.png)
-*Clean, minimalist landing page with bold typography and calligraphy-inspired design. Features hero section, feature cards, and call-to-action buttons.*
-
-### Q&A Chat Interface
-![Chat UI](screenshot/chatui.png)
-*Modern conversational chat interface for asking questions about the Quran. User messages appear in black bubbles, assistant responses in white with citations.*
-
-### Architecture Diagram
-![Architecture](screenshot/architecture.png)
-*System architecture showing the complete flow from frontend to backend, RAG pipeline, and data storage layers.*
-
-### Supporting Verses Display
-![Supporting Verses](screenshot/supporting%20verses.png)
-*Answer display with supporting Quranic verses. Shows Arabic text, translations, and relevance scores in an elegant card layout.*
 
 ## 🎨 Design Philosophy
 
