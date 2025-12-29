@@ -13,3 +13,4 @@ print(f"Parsed origins list: {settings.cors_origins_list}")
 print("=" * 60)
 
 
+

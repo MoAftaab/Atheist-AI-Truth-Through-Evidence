@@ -444,6 +444,18 @@ Error responses:
 
 ## 🚀 Installation
 
+### Option 1: Docker (Recommended)
+
+See [DOCKER.md](DOCKER.md) for detailed Docker setup instructions.
+
+**Quick start:**
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
+```
+
+### Option 2: Manual Setup
+
 ### Prerequisites
 
 - Python 3.11+
