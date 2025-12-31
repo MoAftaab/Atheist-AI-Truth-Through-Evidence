@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
 import { BookOpen, LogOut, User, History } from 'lucide-react'
-import { DarkModeToggle } from './DarkModeToggle'
 
 export function Header() {
   const { user, logout, isAuthenticated } = useAuth()
