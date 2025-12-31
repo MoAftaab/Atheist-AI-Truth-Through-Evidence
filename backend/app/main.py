@@ -31,23 +31,18 @@ def on_startup():
         import traceback
         traceback.print_exc()
 
-# Configure CORS
-# For development, allow all origins. For production, use specific origins from .env
+# Configure CORS - MUST be added before routers
+# Get origins from settings (parsed from CORS_ORIGINS env variable)
 cors_origins = settings.cors_origins_list
-# Add common development origins if not already present
-if "http://localhost:3000" not in cors_origins:
-    cors_origins.append("http://localhost:3000")
-if "http://127.0.0.1:3000" not in cors_origins:
-    cors_origins.append("http://127.0.0.1:3000")
 
 print(f"🔧 CORS Origins: {cors_origins}")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
+    allow_origins=cors_origins,  # Explicit list of allowed origins (production-safe)
+    allow_credentials=True,  # Required for cookies/auth headers
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Includes OPTIONS for preflight
+    allow_headers=["Content-Type", "Authorization", "Accept"],  # Explicit headers (production-safe)
     expose_headers=["*"],
 )
 
