@@ -39,6 +39,7 @@ class Settings(BaseSettings):
         "CORS_ORIGINS",
         "http://localhost:3000,http://localhost:3001,https://atheist-ai-truth-through-evidence.vercel.app"
     )
+    # Note: Vercel preview URLs (e.g., *-*.vercel.app) are handled via allow_origin_regex in main.py
     
     @property
     def cors_origins_list(self) -> list:

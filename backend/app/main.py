@@ -37,9 +37,13 @@ cors_origins = settings.cors_origins_list
 
 print(f"🔧 CORS Origins: {cors_origins}")
 
+# Vercel preview URLs pattern (matches *.vercel.app and *-*.vercel.app)
+vercel_pattern = r"https://.*\.vercel\.app"
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,  # Explicit list of allowed origins (production-safe)
+    allow_origin_regex=vercel_pattern,  # Allow all Vercel preview deployments
     allow_credentials=True,  # Required for cookies/auth headers
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Includes OPTIONS for preflight
     allow_headers=["Content-Type", "Authorization", "Accept"],  # Explicit headers (production-safe)
@@ -52,6 +56,7 @@ app.include_router(auth.router, prefix=f"{settings.API_V1_PREFIX}/auth", tags=["
 app.include_router(queries.router, prefix=f"{settings.API_V1_PREFIX}/queries", tags=["queries"])
 
 @app.get("/")
+@app.head("/")
 async def root():
     return {
         "message": "Atheist AI API",
